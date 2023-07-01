@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        section{
+            height: 100vh;
+            width: 100%;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div{
+            height: 500px;
+            width: 500px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-radius: 50%;
+            background: url("13-136101_clock-face-circle.png"),linear-gradient(45deg, #e60000, #ff0000);
+            background-size: contain;
+            box-shadow:  20px -20px 60px #d90000,
+                        -20px 20px 60px #ff0000;
+        }
+        #dot{
+            height: 10px;
+            width: 10px;
+            background-color: rgb(255, 0, 0);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 5;
+            border: 2px solid white;
+        }
+        #hour{
+            height: 100px;
+            width: 5px;
+            background-color: rgb(0, 0, 0);
+            top: 150px;
+            position: absolute;
+            transform-origin: bottom center;
+            transform: rotateZ(130deg);
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px black;
+        }
+        #min{
+            height: 150px;
+            width: 5px;
+            background-color: rgb(85, 80, 80);
+            top: 100px;
+            position: absolute;
+            transform-origin: bottom center;
+            border-radius: 5px;
+            box-shadow: 5px 5px 7px black;
+        }
+        #sec{
+            height: 150px;
+            width: 2.5px;
+            background-color: rgb(255, 255, 255);
+            top: 100px;
+            position: absolute;
+            transform-origin: bottom center;
+            transform: rotateZ(0);
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px black;
+        }
+        
+    </style>
+</head>
+<body>
+    <section>
+        <div>
+            <span id="dot"></span>
+            <span id="hour"></span>
+            <span id="min"></span>
+            <span id="sec"></span>
+        </div>
+    </section>
+    <script>
+        function cl() {
+            let min = 0;
+            let hour = 0;
+            setInterval(()=>{
+                let d = new Date();
+                document.querySelector('#sec').style.transform = "rotateZ("+d.getSeconds()*6+"deg)";
+                min = d.getMinutes()*6+6/(60/d.getSeconds());
+                document.querySelector('#min').style.transform = "rotateZ("+min+"deg)";
+                hour = d.getHours()*30+30/(60/d.getMinutes());
+                document.querySelector('#hour').style.transform = "rotateZ("+hour+"deg)";
+            },1000);
+        }
+        cl();
+    </script>
+</body>
+</html>
